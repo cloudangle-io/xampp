@@ -1,0 +1,14 @@
+#!/bin/sh
+
+sed -i "s/__DB_USERNAME__/$db_username/g" /opt/lampp/phpmyadmin/config.inc.php
+sed -i "s/__DB_PASSWORD__/$db_password/g" /opt/lampp/phpmyadmin/config.inc.php
+sed -i "s/__DB_HOST__/$db_host/g" /opt/lampp/phpmyadmin/config.inc.php
+sed -i "s/~E_STRICT/~E_STRICT \& ~E_NOTICE \& ~E_WARNING/g" /opt/lampp/etc/php.ini
+
+
+/opt/lampp/lampp start
+
+touch /opt/lampp/logs/error_log
+tail -f /opt/lampp/logs/error_log &
+
+sleep infinity
